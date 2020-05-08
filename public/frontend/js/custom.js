@@ -13,6 +13,7 @@ $(document).ready(function() {
         autoPlay: 5000, //Set AutoPlay to 5 seconds
         navigation: false,
         singleItem: true,
+        mouseDrag: false,
         transitionStyle: "fade"
     });
 
@@ -226,7 +227,7 @@ $(document).ready(function() {
 
 
     /* ---------------------------------------------
-      Pre loader loader 
+      Pre loader loader
      --------------------------------------------- */
 
     $(".se-pre-con").fadeOut("slow");
@@ -272,7 +273,7 @@ $(document).ready(function() {
 
 
     /* ---------------------------------------------
-     Date picker  
+     Date picker
      --------------------------------------------- */
 
     $("#from").datepicker({
@@ -354,7 +355,7 @@ $(document).ready(function() {
     setInterval(function() { tick() }, 3000);
 
     /* ---------------------------------------------
-     Form 
+     Form
      --------------------------------------------- */
 
     if (!String.prototype.trim) {
@@ -395,7 +396,7 @@ $(window).on({
     load: function() {
 
         /* ---------------------------------------------
-          Scroll Box 
+          Scroll Box
          --------------------------------------------- */
 
         $(".mobile-menu").mCustomScrollbar({ theme: "minimal" });
@@ -407,7 +408,7 @@ $(window).on({
     scroll: function() {
 
         /* ---------------------------------------------
-        Scroll to Top 
+        Scroll to Top
         --------------------------------------------- */
 
         if ($(this).scrollTop() !== 0) {
@@ -425,7 +426,7 @@ $(window).on({
  This is for Mobile Menu
  --------------------------------------------- */
 
-//Nav Icon at mobile 
+//Nav Icon at mobile
 $('.nav-icon').on('click', function() {
     $(this).toggleClass('open');
 });
