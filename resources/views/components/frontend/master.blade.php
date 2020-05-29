@@ -31,11 +31,11 @@
 
 <body>
 <div class="se-pre-con"></div>
-<x-partials.header />
+<x-frontend.partials.header />
 
     {{ $slot }}
 
-<x-partials.footer />
+<x-frontend.partials.footer />
 
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

@@ -43,13 +43,13 @@ This file contains the common info of this theme.
                   * Contact Styletwo
                 * Login & Registration
 
-    * Body 
+    * Body
       * Slider News
       * Latest News
       * Different Categories News
-      * online vote 
+      * online vote
       * video
-      * Flicker widget 
+      * Flicker widget
     * Contact
       * Address
       * Contact Form
@@ -59,7 +59,7 @@ This file contains the common info of this theme.
       * Featured news
       * Top rated
       * Address
-      * Sub footer 
+      * Sub footer
 * ===============================================*/
 
 
@@ -286,7 +286,7 @@ li {
 /* Paste this css to your style sheet file or under head tag */
 
 
-/* This only works with JavaScript, 
+/* This only works with JavaScript,
 if it's not present, don't show loader */
 
 .no-js #loader {
@@ -504,7 +504,7 @@ if it's not present, don't show loader */
 /*----------------------------*** ganeral style end ***-------------------------*/
 
 
-/*** Top Header 
+/*** Top Header
 -------------------------------------------*/
 
 header {
@@ -1449,7 +1449,7 @@ header {
 }
 
 
-/*** Twitter Feed 
+/*** Twitter Feed
 -------------------------------------------*/
 
 .feed-inner {
@@ -1492,7 +1492,7 @@ header {
 }
 
 
-/*** Tab 
+/*** Tab
 -------------------------------------------*/
 
 .tab-inner {
@@ -2947,7 +2947,7 @@ textarea.input_field {
 }
 
 
-/*** Category page one, two, three 
+/*** Category page one, two, three
 ------------------------------------------------------------------------------*/
 
 .block-inner {
@@ -3769,7 +3769,7 @@ a.expand {
 }
 
 
-/*** Contact page one & two 
+/*** Contact page one & two
 -------------------------------------------*/
 
 .contact-title {
@@ -3916,7 +3916,7 @@ a.expand {
     }
     .headding-news .post-grid-1,
     .headding-news .post-grid-2,
-    .headding-news .post-grid-4,
+    .headding-news .post-grid-4
     {
         padding-right: 0;
         padding-bottom: 0;

@@ -105,3 +105,52 @@
     position: relative;
     top: 0px;
 }
+
+.card-icon{
+    font-size: 60px;
+}
+
+
+.filter-option {
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.multiselect button.btn.dropdown-toggle.bs-placeholder.btn-light{
+    background: transparent;
+}
+
+.multiselect button.btn.dropdown-toggle.bs-placeholder.btn-light:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+.multiselect .filter-option{
+    color: #333;
+}
+.multiselect .btn,.multiselect .navbar .navbar-nav>a.btn{
+    background: transparent !important;
+}
+
+.multiselect ul.dropdown-menu.inner.show {
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.multiselect .btn{
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+}
+
+.multiselect .form-control{
+    padding: 0 !important;
+}
+
+.multiselect .filter-option{
+    height: 38px !important;
+}
+
+.multiselect .dropdown-toggle::after {
+    border-top: 3px solid #333;
+}

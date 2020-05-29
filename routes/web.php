@@ -13,10 +13,28 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
+Auth::routes();
+
 Route::get('/', function () {
     return view('frontend/home');
 });
 
-Auth::routes();
+Route::get('/dashboard', function () {
+    return view('backend/dashboard', [
+        'user' => \App\User::all(),
+    ]);
+});
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+//sub category
+Route::get('/get_subcategory', 'SubCategoryController@getSubcategory');
+
+//post
+Route::get('/post/add', 'PostController@create')->name('post.create');
+Route::post('/post/store', 'PostController@store')->name('post.store');
+Route::get('/post/index', 'PostController@index')->name('post.index');
+Route::get('/post/show/{id}', 'PostController@show')->name('post.show');
+
