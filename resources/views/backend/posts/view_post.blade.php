@@ -3,11 +3,11 @@
         <div class="row">
             <div class="col-md-12 m-auto">
                 <div class="card">
-                    <div class="card-header d-flex">
+                    <div class="card-header d-flex align-items-baseline justify-content-between">
                         <h5>View post</h5>
                         <div class="modify-btns">
-                            <a href="#">Delete</a>
-                            <a href="#">Edit</a>
+                            <a class="btn btn-sm btn-primary px-4" href="{{route('post.edit', $post->id)}}">Edit</a>
+                            <a class="btn btn-sm btn-primary" href="{{route('post.destroy', $post->id)}}">Delete</a>
                         </div>
                     </div>
                     <div class="card-body">

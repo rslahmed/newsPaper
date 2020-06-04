@@ -40,8 +40,8 @@ class PostController extends Controller
         $data = [
             'title' => request()->title,
             'description' => request()->description,
-            'category_id' => request()->category_id,
-            'subcategory_id' => request()->subcategory_id,
+            'category_id' => request()->category,
+            'subcategory_id' => request()->subcategory,
             'author_name' => request()->author_name,
             'featured_news' => request()->featured_news,
             'published' => request()->publish,
@@ -59,7 +59,8 @@ class PostController extends Controller
             $data['image'] = $image;
         }
         $data['image'] = $image;
-        return Post::create($data);
+        Post::create($data);
+        return back();
     }
 
     public function show($id)
@@ -72,19 +73,55 @@ class PostController extends Controller
 
     public function edit($id)
     {
-        //
+        return view('backend.posts.create_post', [
+            'journalist' => User::all(),
+            'category' => Category::all(),
+            'subcategory' => SubCategory::all(),
+            'tag' => Tag::all(),
+            'prev_data' => Post::where('id', $id)->first()
+        ]);
     }
 
 
-    public function update(Request $request, $id)
+    public function update($id)
     {
-        //
+        $this->validatePost();
+        $data = [
+            'title' => request()->title,
+            'description' => request()->description,
+            'category_id' => request()->category_id,
+            'subcategory_id' => request()->subcategory_id,
+            'author_name' => request()->author_name,
+            'featured_news' => request()->featured_news,
+            'published' => request()->publish,
+            'tag_id' => json_encode(request()->tag_id),
+            'image_caption' => request()->image_caption,
+        ];
+
+        $file = request()->image;
+        if ($file){
+            request()->validate([
+                'image' => 'image|mimes:jpg,png,jpeg',
+            ]);
+            $oldImage = Post::find($id)->image;
+            if ($oldImage != ''){
+                @unlink(public_path().$oldImage);
+            }
+            $path = '/backend/upload/';
+            $image = $path.uniqid().time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path().($path), $image);
+            $data['image'] = $image;
+        }
+
+        Post::where('id', $id)->update($data);
+        return back()->with('success', 'post updated');
     }
 
 
     public function destroy($id)
     {
-        //
+        Post::where('id',$id)->delete();
+        return redirect(route('post.index'));
     }
 
     function validatePost(){

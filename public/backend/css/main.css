@@ -154,3 +154,15 @@
 .multiselect .dropdown-toggle::after {
     border-top: 3px solid #333;
 }
+
+.prev_img_wrap{
+    width: 205px;
+    position: relative;
+}
+
+.prev_img_wrap img{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
