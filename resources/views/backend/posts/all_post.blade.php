@@ -19,6 +19,8 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @if($post->count() > 0)
+
                             @foreach($post as $row)
                                 <tr>
                                     <th scope="row">{{$row->id}}</th>
@@ -30,6 +32,12 @@
                                     <td>@if($row->published == 1)Yes @else No @endif</td>
                                 </tr>
                             @endforeach
+
+                            @else
+                                <tr>
+                                    <td colspan="3" class="text-center">no data avilable</td>
+                                </tr>
+                            @endif
                             </tbody>
                         </table>
 
@@ -39,6 +47,8 @@
             </div>
         </div>
     </div>
+
+
 
     <x-slot name="script">
         <script !src="">

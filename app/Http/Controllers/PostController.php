@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         return view('backend.posts.all_post', [
-            'post' => Post::paginate(10),
+            'post' => Post::orderBy('id','desc')->paginate(10),
         ]);
     }
 
@@ -59,8 +59,13 @@ class PostController extends Controller
             $data['image'] = $image;
         }
         $data['image'] = $image;
-        Post::create($data);
-        return back();
+        $create = Post::create($data);
+        if($create){
+            return back()->with('success', 'New post created');
+        }else{
+            return back()->with('error', 'something went wrong, please try again');
+        }
+
     }
 
     public function show($id)
@@ -78,7 +83,7 @@ class PostController extends Controller
             'category' => Category::all(),
             'subcategory' => SubCategory::all(),
             'tag' => Tag::all(),
-            'prev_data' => Post::where('id', $id)->first()
+            'prev_data' => Post::findOrFail($id)
         ]);
     }
 
@@ -89,8 +94,8 @@ class PostController extends Controller
         $data = [
             'title' => request()->title,
             'description' => request()->description,
-            'category_id' => request()->category_id,
-            'subcategory_id' => request()->subcategory_id,
+            'category_id' => request()->category,
+            'subcategory_id' => request()->subcategory,
             'author_name' => request()->author_name,
             'featured_news' => request()->featured_news,
             'published' => request()->publish,
@@ -113,15 +118,23 @@ class PostController extends Controller
             $data['image'] = $image;
         }
 
-        Post::where('id', $id)->update($data);
-        return back()->with('success', 'post updated');
+        $update = Post::where('id', $id)->update($data);
+        if($update){
+            return back()->with('success', 'Post updated');
+        }else{
+            return back()->with('error', 'something went wrong, please try again');
+        }
     }
 
 
     public function destroy($id)
     {
-        Post::where('id',$id)->delete();
-        return redirect(route('post.index'));
+        $delete = Post::where('id',$id)->delete();
+        if($delete){
+            return redirect(route('post.index'))->with('success', 'Post deleted');
+        }else{
+            return back()->with('error', 'something went wrong, please try again');
+        }
     }
 
     function validatePost(){

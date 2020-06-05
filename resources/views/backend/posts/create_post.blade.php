@@ -52,7 +52,6 @@
                                         @endif
                                     </select>
                                 </div>
-
                                 <div class="mb-3 w-25 mt-3 ml-3 multiselect">
                                     <label for="tag">Select Tags:</label>
                                     <select class="form-control" id="tag" name="tag_id[]" multiple>
@@ -61,17 +60,14 @@
                                         @endforeach
                                     </select>
                                 </div>
-
                             </div>
 
                             <div class="d-flex mt-2">
-
-
                                 <div class="form-group w-25 ">
-                                    <input type="text" name="image_caption" class="form-control" placeholder="Image caption" value="{{old('image_caption') ?? $prev_data->image_caption ?? ''}}">
-                                </div>
-                                <div class="form-group ml-2 w-25 ml-3">
                                     <input type="text" name="author_name" class="form-control" placeholder="Author Name" value="{{old('author_name') ?? $prev_data->author_name ?? ''}}">
+                                </div>
+                                <div class="form-group w-25 ml-3">
+                                    <input type="text" name="image_caption" class="form-control" placeholder="Image caption" value="{{old('image_caption') ?? $prev_data->image_caption ?? ''}}">
                                 </div>
                                 <div class=" w-25">
                                     <input type="file" name="image" class="form-control py-2 ml-3" onchange="document.getElementById('prev_img').src = window.URL.createObjectURL(this.files[0])">

@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     <!-- CSS Files -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('backend/css/now-ui-dashboard.css')}}" rel="stylesheet"/>
@@ -22,6 +24,9 @@
 </head>
 
 <body class="">
+<div class="preloader">
+    <img src="{{asset('images/preloader.gif')}}" alt="">
+</div>
 <div class="wrapper ">
     <x-backend.partials.sidebar />
     <div class="main-panel" id="main-panel">
@@ -43,8 +48,49 @@
 <script src="{{asset('backend/js/bootstrap-notify.js')}}"></script>
 <script src="{{asset('backend/js/now-ui-dashboard.js')}}" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
-{{--<script src="{{asset('backend/js/main.js')}}"></script>--}}
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 
+{{--<script src="{{asset('backend/js/main.js')}}"></script>--}}
+<script !src="">
+    // loader
+    function loaderShow(){
+        $('.preloader').show();
+    }
+    function loaderHide(){
+        $('.preloader').hide();
+    }
+
+    // alertify msg
+    @if(Session::has('success'))
+        alertify.success('{{ Session::get('success') }}');
+    @endif
+
+    @if(Session::has('error'))
+        alertify.success('{{ Session::get('error') }}');
+    @endif
+
+    @if($errors->any())
+        @foreach ($errors->all() as $error)
+            alertify.error('{{ $error }}');
+        @endforeach
+    @endif
+
+    //alertify confirmation
+    $(document).on('click','.delete_btn', function(e){
+        e.preventDefault();
+        let href = $(this).attr('href');
+        alertify.confirm('Confirm Title', 'Confirm Message',
+            function(){
+                loaderShow();
+                window.location = href;
+            },
+            function(){
+            alertify.error('Cancelled')
+        }).set('labels', {ok:'Delete!', cancel:'Cancel!'});
+    })
+
+
+</script>
 @isset($script)
     {{ $script }}
 @endisset

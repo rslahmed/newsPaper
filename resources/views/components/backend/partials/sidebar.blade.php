@@ -16,7 +16,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="{{route('category.index')}}">
                     <i class="now-ui-icons design_bullet-list-67"></i>
                     <p>Categories</p>
                 </a>
