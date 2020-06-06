@@ -17,6 +17,11 @@ class SubCategoryController extends Controller
         ]);
     }
 
+    public function getSubcategory(){
+        $category = SubCategory::select('name', 'id')->where('category_id', request()->id)->get();
+        return json_encode($category);
+    }
+
     public function catFilter($id){
         if($id == 'all'){
             $subcategories = SubCategory::all();

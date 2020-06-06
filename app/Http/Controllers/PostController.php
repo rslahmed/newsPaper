@@ -11,15 +11,12 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public $postImgPath = 'uploads/post/';
+
     public function index()
     {
         return view('backend.posts.all_post', [
-            'post' => Post::orderBy('id','desc')->paginate(10),
+            'post' => Post::all(),
         ]);
     }
 
@@ -33,7 +30,7 @@ class PostController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store()
     {
         $this->validatePost();
 
@@ -48,14 +45,14 @@ class PostController extends Controller
             'tag_id' => json_encode(request()->tag_id),
             'image_caption' => request()->image_caption,
         ];
-        $file = $request->image;
+        $file = request()->image;
         if($file){
             request()->validate([
                 'image' => 'image|mimes:jpg,png,jpeg,gif',
             ]);
-            $path = '/backend/upload/';
-            $image = $path.uniqid().time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path().($path), $image);
+
+            $image = $this->postImgPath.uniqid().time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path().'/'.($this->postImgPath), $image);
             $data['image'] = $image;
         }
         $data['image'] = $image;
@@ -71,7 +68,7 @@ class PostController extends Controller
     public function show($id)
     {
         return view('backend.posts.view_post', [
-           'post' => Post::where('id', $id)->first(),
+           'post' => Post::findOrFail($id),
         ]);
     }
 
@@ -110,11 +107,11 @@ class PostController extends Controller
             ]);
             $oldImage = Post::find($id)->image;
             if ($oldImage != ''){
-                @unlink(public_path().$oldImage);
+                @unlink(public_path().'/'.$oldImage);
             }
-            $path = '/backend/upload/';
-            $image = $path.uniqid().time().'.'.$file->getClientOriginalExtension();
-            $file->move(public_path().($path), $image);
+
+            $image = $this->postImgPath.uniqid().time().'.'.$file->getClientOriginalExtension();
+            $file->move(public_path().'/'.($this->postImgPath), $image);
             $data['image'] = $image;
         }
 
@@ -129,8 +126,10 @@ class PostController extends Controller
 
     public function destroy($id)
     {
+        $imgpath = Post::findOrFail($id)->image;
         $delete = Post::where('id',$id)->delete();
         if($delete){
+            @unlink(public_path().$imgpath);
             return redirect(route('post.index'))->with('success', 'Post deleted');
         }else{
             return back()->with('error', 'something went wrong, please try again');
@@ -146,7 +145,7 @@ class PostController extends Controller
            'author_name' => 'max:28',
            'featured_news' => 'integer',
            'tag_id' => 'array',
-           'image_caption' => 'max:28',
+           'image_caption' => 'string',
         ]);
     }
 }

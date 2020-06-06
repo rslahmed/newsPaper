@@ -51,5 +51,6 @@ Route::get('/subcategory/filter/{id}', 'SubCategoryController@catFilter')->name(
 Route::post('/subcategory/store', 'SubCategoryController@store')->name('subcategory.store');
 Route::post('/subcategory/update/{id}', 'SubCategoryController@update')->name('subcategory.update');
 Route::get('/subcategory/destroy/{id}', 'SubCategoryController@destroy')->name('subcategory.destroy');
+Route::get('/get_subcategory', 'SubCategoryController@getSubcategory')->name('subcategory.getsub');
 
 

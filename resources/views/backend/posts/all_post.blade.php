@@ -8,7 +8,7 @@
                         <a class="btn btn-sm btn-primary" href="{{route('post.create')}}">Create post+</a>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover" id="sortableTable">
                             <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -35,13 +35,12 @@
 
                             @else
                                 <tr>
-                                    <td colspan="3" class="text-center">no data avilable</td>
+                                    <td colspan="5" class="text-center">no data avilable</td>
                                 </tr>
                             @endif
                             </tbody>
                         </table>
 
-                        {{$post->links()}}
                     </div>
                 </div>
             </div>

@@ -8,7 +8,7 @@
             <div class="col-md-11 m-auto">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="mt-0 mb-0 text-center font-weight-bold">Create Post</h4>
+                        <h4 class="mt-0 mb-0 text-center font-weight-bold">@if(!empty($prev_data)) Edit @else Create @endif Post</h4>
                         @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
@@ -45,7 +45,7 @@
                                     <label for="subcategory">Select SubCategory:</label>
                                     <select class="form-control" id="subcategory" name="subcategory">
                                         <option class="default" value="" >Select SubCategory</option>
-                                        @if(!empty($prev_data->subcategory))
+                                        @if(!empty($prev_data->category))
                                             @foreach($prev_data->category->subcategory as $row)
                                                 <option value="{{$row->id}}" @if((old('subcategory') ?? $prev_data->subcategory_id ?? '') == $row->id) selected @endif>{{$row->name}}</option>
                                             @endforeach

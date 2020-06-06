@@ -24,4 +24,5 @@ class Post extends Model
         return Tag::whereIn('id', $id)->get();
     }
 
+
 }

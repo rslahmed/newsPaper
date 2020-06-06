@@ -14,7 +14,7 @@
                         <h3 class="mb-2"><span class="td-un">Title</span>: {{$post->title}}</h3>
                         <div class="post_img mb-3">
                             @if($post->image)
-                                <img style="max-height: 300px;" src="{{$post->image}}" alt="">
+                                <img style="max-height: 300px;" src="{{asset($post->image)}}" alt="">
                                 @else
                                 <p>No Preview image</p>
                             @endif
