@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
+
     <!-- CSS Files -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet"/>
     <link href="{{asset('backend/css/now-ui-dashboard.css')}}" rel="stylesheet"/>
@@ -49,6 +51,7 @@
 <script src="{{asset('backend/js/now-ui-dashboard.js')}}" type="text/javascript"></script>
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.16/dist/summernote.min.js"></script>
 <script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
 
 {{--<script src="{{asset('backend/js/main.js')}}"></script>--}}
 <script !src="">
@@ -90,6 +93,9 @@
     })
 
 
+    $(document).ready( function () {
+        $('#sortableTable').DataTable();
+    } );
 </script>
 @isset($script)
     {{ $script }}

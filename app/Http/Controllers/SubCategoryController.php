@@ -8,83 +8,70 @@ use Illuminate\Http\Request;
 
 class SubCategoryController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return view('backend.subcategory.all_subcategory', [
+            'subcategories' => SubCategory::orderBy('id', 'desc')->paginate(10),
+            'categories' => Category::all(),
+        ]);
     }
 
-    function getSubcategory(){
-        $category = SubCategory::select('name', 'id')->where('category_id', request()->id)->get();
-        return json_encode($category);
-    }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function catFilter($id){
+        if($id == 'all'){
+            $subcategories = SubCategory::all();
+            $selectedCat = null;
+        }else{
+            $selectedCat = $id;
+            $subcategories = SubCategory::where('category_id', $id)->orderBy('id', 'desc')->get();
+        }
+        return view('backend.subcategory.all_subcategory', [
+            'subcategories' => $subcategories,
+            'selectedCat' => $selectedCat,
+            'categories' => Category::all(),
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function show(SubCategory $subCategory)
+    public function store()
     {
-        //
+        $data = request()->validate([
+            'name' => 'required|string|max:25|min:3',
+            'category_id' => 'required|integer',
+        ]);
+
+        $create = SubCategory::create($data);
+        if($create){
+            return back()->with('success', 'Subcategory added');
+        }else{
+            return back()->with('error', 'Something went wrong, please try again');
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(SubCategory $subCategory)
+
+    public function update($id)
     {
-        //
+        $data = request()->validate([
+            'name' => 'required|string|min:3|max:25',
+            'category_id' => 'required|integer',
+        ]);
+
+        $update = SubCategory::findOrFail($id)->update($data);
+
+        if($update){
+            return back()->with('success', 'Subcategory updated');
+        }else{
+            return back()->with('error', 'Something went wrong, please try again');
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, SubCategory $subCategory)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\SubCategory  $subCategory
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(SubCategory $subCategory)
+    public function destroy($id)
     {
-        //
+        $delete = SubCategory::findOrFail($id)->delete();
+        if($delete){
+            return back()->with('success', 'Subcategory deleted');
+        }else{
+            return back()->with('error', 'Something went wrong, please try again');
+        }
     }
 }

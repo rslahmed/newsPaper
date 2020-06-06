@@ -22,6 +22,12 @@
                 </a>
             </li>
             <li>
+                <a href="{{route('subcategory.index')}}">
+                    <i class="now-ui-icons design_bullet-list-67"></i>
+                    <p>Subcategories</p>
+                </a>
+            </li>
+            <li>
                 <a href="{{route('post.index')}}">
                     <i class="now-ui-icons education_paper"></i>
                     <p>Posts</p>

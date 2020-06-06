@@ -191,3 +191,20 @@
     text-decoration: underline !important;
     font-weight: bold !important;
 }
+
+#subcat_filter{
+    position: relative;
+    left: 0px;
+    top: 22px;
+    z-index: 9;
+}
+.subcat div#sortableTable_length {
+    margin-left: 130px;
+}
+
+table.dataTable th.no-sorting{
+    background-image: none !important;
+}
+table#sortableTable {
+    margin-top: 25px;
+}

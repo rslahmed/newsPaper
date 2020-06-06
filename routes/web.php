@@ -29,8 +29,6 @@ Route::get('/dashboard', function () {
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//sub category
-Route::get('/get_subcategory', 'SubCategoryController@getSubcategory');
 
 //post
 Route::get('/post/add', 'PostController@create')->name('post.create');
@@ -46,5 +44,12 @@ Route::get('/category/index', 'CategoryController@index')->name('category.index'
 Route::post('/category/store', 'CategoryController@store')->name('category.store');
 Route::post('/category/update/{id}', 'CategoryController@update')->name('category.update');
 Route::get('/category/destroy/{id}', 'CategoryController@destroy')->name('category.destroy');
+
+// subcategory
+Route::get('/subcategory/index', 'SubCategoryController@index')->name('subcategory.index');
+Route::get('/subcategory/filter/{id}', 'SubCategoryController@catFilter')->name('subcategory.filter');
+Route::post('/subcategory/store', 'SubCategoryController@store')->name('subcategory.store');
+Route::post('/subcategory/update/{id}', 'SubCategoryController@update')->name('subcategory.update');
+Route::get('/subcategory/destroy/{id}', 'SubCategoryController@destroy')->name('subcategory.destroy');
 
 

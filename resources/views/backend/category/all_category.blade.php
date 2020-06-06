@@ -8,7 +8,7 @@
                         <button class="btn btn-sm btn-primary add_btn">Create Category+</button>
                     </div>
                     <div class="card-body">
-                        <table class="table table-striped table-hover">
+                        <table class="table table-striped table-hover" id="sortableTable">
                             <thead>
                             <tr>
                                 <th scope="col">ID</th>
@@ -36,7 +36,6 @@
                             </tbody>
                         </table>
 
-                        {{$categories->links()}}
                     </div>
                 </div>
             </div>
@@ -50,7 +49,7 @@
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <h5 class="modal-title" id="modalTitle">Add Category</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -77,12 +76,14 @@
                 $('#createCat').modal('show');
                 $('#catName').val(name);
                 $('#modalForm').attr('action', '/category/update/'+id);
+                $('#modalTitle').text('Edit Category');
             })
 
             $('.add_btn').click(function(){
                 $('#createCat').modal('show');
                 $('#catName').val('');
                 $('#modalForm').attr('action', '/category/store');
+                $('#modalTitle').text('Add Category');
             })
         </script>
     </x-slot>
