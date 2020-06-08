@@ -2,33 +2,14 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-
 Auth::routes();
 
 Route::get('/', function () {
     return view('frontend/home');
 });
 
-Route::get('/dashboard', function () {
-    return view('backend/dashboard', [
-        'user' => \App\User::all(),
-    ]);
-});
-
-Route::get('/home', 'HomeController@index')->name('home');
-
+//dashboard
+Route::get('/dashboard', 'HomeController@index')->name('dashboard');
 
 //post
 Route::get('/post/add', 'PostController@create')->name('post.create');
@@ -53,4 +34,23 @@ Route::post('/subcategory/update/{id}', 'SubCategoryController@update')->name('s
 Route::get('/subcategory/destroy/{id}', 'SubCategoryController@destroy')->name('subcategory.destroy');
 Route::get('/get_subcategory', 'SubCategoryController@getSubcategory')->name('subcategory.getsub');
 
+//tag
+Route::get('/tag/index', 'TagController@index')->name('tag.index');
+Route::post('/tag/store', 'TagController@store')->name('tag.store');
+Route::post('/tag/update/{id}', 'TagController@update')->name('tag.update');
+Route::get('/tag/destroy/{id}', 'TagController@destroy')->name('tag.destroy');
 
+//Headlines
+Route::get('/headline/index', 'HeadlineController@index')->name('headline.index');
+Route::post('/headline/store', 'HeadlineController@store')->name('headline.store');
+Route::post('/headline/update/{id}', 'HeadlineController@update')->name('headline.update');
+Route::get('/headline/destroy/{id}', 'HeadlineController@destroy')->name('headline.destroy');
+
+//subscriber
+Route::get('/subscriber/index', 'SubscriberController@index')->name('subscriber.index');
+Route::post('/subscriber/store', 'SubscriberController@store')->name('subscriber.store');
+Route::get('/subscriber/destroy/{id}', 'SubscriberController@destroy')->name('subscriber.destroy');
+
+//journalist
+Route::get('/journalist/index', 'JournalistController@index')->name('journalist.index');
+Route::get('/journalist/destroy/{id}', 'JournalistController@destroy')->name('journalist.destroy');

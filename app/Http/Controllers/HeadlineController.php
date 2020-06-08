@@ -2,28 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Tag;
+use App\Headline;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class HeadlineController extends Controller
 {
 
     public function index()
     {
-        return view('backend.tags.all_tags',[
-            'tags' => Tag::all()
+        return view('backend.headlines.all_headlines',[
+            'headlines' => Headline::all()
         ]);
     }
 
     public function store()
     {
         $data = request()->validate([
-            'name' => 'required|string|max:25|min:3|unique:tags'
+            'name' => 'required|string|min:3'
         ]);
 
-        $create = Tag::create($data);
+        $create = Headline::create($data);
         if($create){
-            return back()->with('success', 'Tag added');
+            return back()->with('success', 'Headline added');
         }else{
             return back()->with('error', 'Something went wrong, please try again');
         }
@@ -32,13 +32,13 @@ class TagController extends Controller
     public function update($id)
     {
         $data = request()->validate([
-            'name' => 'required|string|min:3|max:25|unique:tags'
+            'name' => 'required|string|min:3'
         ]);
 
-        $update = Tag::findOrFail($id)->update($data);
+        $update = Headline::findOrFail($id)->update($data);
 
         if($update){
-            return back()->with('success', 'Tag updated');
+            return back()->with('success', 'Headline updated');
         }else{
             return back()->with('error', 'Something went wrong, please try again');
         }
@@ -46,9 +46,9 @@ class TagController extends Controller
 
     public function destroy($id)
     {
-        $delete = Tag::findOrFail($id)->delete();
+        $delete = Headline::findOrFail($id)->delete();
         if($delete){
-            return back()->with('success', 'Tag deleted');
+            return back()->with('success', 'Headline deleted');
         }else{
             return back()->with('error', 'Something went wrong, please try again');
         }

@@ -23,8 +23,11 @@
                         <h3 class="category-headding ">NEWSLETTER</h3>
                         <div class="headding-border"></div>
                         <p>Enter your email address for our mailing list!</p>
-                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-                        <button type="button" class="btn btn-style">Subscribe</button>
+                        <form action="{{route('subscriber.store')}}" method="post">
+                            @csrf
+                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                            <button type="submit" class="btn btn-style">Subscribe</button>
+                        </form>
                     </div>
                     <!-- /.newsletter -->
                 </div>

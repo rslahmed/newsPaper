@@ -34,21 +34,27 @@
                 </a>
             </li>
             <li>
-                <a href="./map.html">
-                    <i class="now-ui-icons location_map-big"></i>
-                    <p>Maps</p>
+                <a href="{{route('tag.index')}}">
+                    <i class="now-ui-icons shopping_tag-content"></i>
+                    <p>Tags</p>
                 </a>
             </li>
             <li>
-                <a href="./notifications.html">
-                    <i class="now-ui-icons ui-1_bell-53"></i>
-                    <p>Notifications</p>
+                <a href="{{route('headline.index')}}">
+                    <i class="now-ui-icons text_align-left"></i>
+                    <p>Headlines</p>
                 </a>
             </li>
             <li>
-                <a href="user.php">
+                <a href="{{route('journalist.index')}}">
                     <i class="now-ui-icons users_single-02"></i>
-                    <p>User Profile</p>
+                    <p>Journalist</p>
+                </a>
+            </li>
+            <li>
+                <a href="{{route('subscriber.index')}}">
+                    <i class="now-ui-icons users_circle-08"></i>
+                    <p>Subscriber</p>
                 </a>
             </li>
 

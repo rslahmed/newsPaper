@@ -59,7 +59,14 @@
                     <div class="dropdown-menu dropdown-menu-right ac_drop">
                         <a class="dropdown-item" href="#"><i class="fas fa-user ac_drop-icon mr-3"></i> View profile</a>
                         <a class="dropdown-item" href="#"><i class="fas fa-users-cog ac_drop-icon mr-2 pr-1 "></i> edit profile</a>
-                        <a class="dropdown-item" href="#"><i class="fas fa-sign-in-alt ac_drop-icon mr-3"></i> Logout</a>
+                        <a class="dropdown-item" href="{{ route('logout') }}"
+                           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                            <i class="fas fa-sign-in-alt ac_drop-icon mr-3"></i> Logout
+                        </a>
+
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
                     </div>
                 </li>
             </ul>

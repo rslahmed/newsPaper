@@ -4,27 +4,27 @@
             <div class="col-md-10 m-auto">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-baseline">
-                        <h4 class="m-0">All Categories</h4>
-                        <button class="btn btn-sm btn-primary add_btn">Create Category+</button>
+                        <h4 class="m-0">All Headlines</h4>
+                        <button class="btn btn-sm btn-primary add_btn">Create headline+</button>
                     </div>
                     <div class="card-body">
                         <table class="table table-striped table-hover" id="sortableTable">
                             <thead>
                             <tr>
                                 <th scope="col">ID</th>
-                                <th scope="col">Category Name</th>
+                                <th scope="col">Headline</th>
                                 <th scope="col" class="text-right no-sorting">Action</th>
                             </tr>
                             </thead>
                             <tbody>
-                            @if($categories->count() > 0)
-                                @foreach($categories as $row)
+                            @if($headlines->count() > 0)
+                                @foreach($headlines as $row)
                                     <tr>
                                         <th scope="row">{{$row->id}}</th>
                                         <td>{{$row->name}}</td>
                                         <td class="text-right">
                                             <button class="btn btn-primary btn-sm edit_btn" data-name="{{$row->name}}" data-id="{{$row->id}}">Edit</button>
-                                            <a href="{{route('category.destroy', $row->id)}}" class="btn btn-primary btn-sm delete_btn">Delete</a>
+                                            <a href="{{route('headline.destroy', $row->id)}}" class="btn btn-primary btn-sm delete_btn">Delete</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -45,18 +45,18 @@
     <!-- Modal -->
     <div class="modal fade" id="createCat" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
-            <form action="{{route('category.store')}}" method="post" id="modalForm">
+            <form action="{{route('headline.store')}}" method="post" id="modalForm">
                 @csrf
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitle">Add Category</h5>
+                        <h5 class="modal-title" id="modalTitle">Add Headline</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
                         <div class="form-group">
-                            <input name="name" id="catName" type="text" class="form-control" placeholder="Category Name">
+                            <input name="name" id="catName" type="text" class="form-control" placeholder="Headline">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -75,15 +75,15 @@
                 let id = $(this).attr('data-id');
                 $('#createCat').modal('show');
                 $('#catName').val(name);
-                $('#modalForm').attr('action', '/category/update/'+id);
-                $('#modalTitle').text('Edit Category');
+                $('#modalForm').attr('action', '/headline/update/'+id);
+                $('#modalTitle').text('Edit Headline');
             })
 
             $('.add_btn').click(function(){
                 $('#createCat').modal('show');
                 $('#catName').val('');
-                $('#modalForm').attr('action', '/category/store');
-                $('#modalTitle').text('Add Category');
+                $('#modalForm').attr('action', '/headline/store');
+                $('#modalTitle').text('Add Headline');
             })
         </script>
     </x-slot>

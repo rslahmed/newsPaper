@@ -8,7 +8,7 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
                             <div>
-                                <h3 class="mb-3">{{$user->count()}}</h3>
+                                <h3 class="mb-3">{{$journalist->count()}}</h3>
                                 <span>Total Journalist</span>
                             </div>
                             <div class="card-icon "><i class="fas fa-user"></i></div>
