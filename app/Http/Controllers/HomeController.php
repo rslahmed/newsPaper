@@ -10,13 +10,11 @@ class HomeController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('guest');
     }
 
     public function index()
     {
-        return view('backend.dashboard', [
-            'journalist' => \App\User::all(),
-        ]);
+        return view('frontend.home');
     }
 }

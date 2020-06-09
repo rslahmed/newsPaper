@@ -30,6 +30,7 @@
 </head>
 
 <body>
+{{ Breadcrumbs::render('blog') }}
 <div class="se-pre-con"></div>
 <x-frontend.partials.header />
 

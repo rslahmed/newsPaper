@@ -4,12 +4,14 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', function () {
-    return view('frontend/home');
-});
+//frontend
+//home
+Route::get('/', 'HomeController@index')->name('home');
 
+//backend
 //dashboard
-Route::get('/dashboard', 'HomeController@index')->name('dashboard');
+Route::get('/admin', 'DashboardController@index')->name('dashboard');
+
 
 //post
 Route::get('/post/add', 'PostController@create')->name('post.create');

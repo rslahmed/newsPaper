@@ -69,7 +69,7 @@
     @endif
 
     @if(Session::has('error'))
-        alertify.success('{{ Session::get('error') }}');
+        alertify.error('{{ Session::get('error') }}');
     @endif
 
     @if($errors->any())
