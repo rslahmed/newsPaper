@@ -20,9 +20,5 @@ class Post extends Model
         return $this->belongsTo(SubCategory::class);
     }
 
-    function tags($id){
-        return Tag::whereIn('id', $id)->get();
-    }
-
 
 }

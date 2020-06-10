@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\Mail\SubscriberNews;
 use App\Post;
 use App\SubCategory;
+use App\Subscriber;
 use App\Tag;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
@@ -58,6 +61,9 @@ class PostController extends Controller
         $data['image'] = $image;
         $create = Post::create($data);
         if($create){
+            if(request()->publish == 1 && request()->featured_news == 1){
+                $this->sendMailSub();
+            }
             return back()->with('success', 'New post created');
         }else{
             return back()->with('error', 'something went wrong, please try again');
@@ -67,8 +73,13 @@ class PostController extends Controller
 
     public function show($id)
     {
+        $post =Post::findOrFail($id);
+        if($post->tag_id != 'null'){
+            $tags = Tag::whereIn('id', json_decode($post->tag_id))->get();
+        }
         return view('backend.posts.view_post', [
-           'post' => Post::findOrFail($id),
+           'post' => $post,
+            'tags' => $tags ?? ''
         ]);
     }
 
@@ -87,7 +98,9 @@ class PostController extends Controller
 
     public function update($id)
     {
+        $oldPub = Post::findOrFail($id)->published;
         $this->validatePost();
+
         $data = [
             'title' => request()->title,
             'description' => request()->description,
@@ -117,6 +130,9 @@ class PostController extends Controller
 
         $update = Post::where('id', $id)->update($data);
         if($update){
+            if($oldPub == 0 && request()->publish == 1 && request()->featured_news == 1){
+                $this->sendMailSub();
+            }
             return back()->with('success', 'Post updated');
         }else{
             return back()->with('error', 'something went wrong, please try again');
@@ -147,5 +163,15 @@ class PostController extends Controller
            'tag_id' => 'array',
            'image_caption' => 'string',
         ]);
+    }
+
+    function sendMailSub(){
+        $mailData = new \stdClass;
+        $mailData->id =  request()->id;
+        $mailData->subject =  request()->title;
+        $subs = Subscriber::all();
+        foreach ($subs as $sub){
+            Mail::to($sub->email)->send(new SubscriberNews($mailData));
+        }
     }
 }

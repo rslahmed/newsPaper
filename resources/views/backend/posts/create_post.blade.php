@@ -56,7 +56,12 @@
                                     <label for="tag">Select Tags:</label>
                                     <select class="form-control" id="tag" name="tag_id[]" multiple>
                                         @foreach($tag as $row)
-                                            <option value="{{$row->id}}" @if(in_array($row->id, (old('tag_id') ?? json_decode($prev_data->tag_id ?? '[]') ))) selected @endif>{{$row->name}}</option>
+                                            @php
+                                                if(!empty($prev_data) && json_decode($prev_data->tag_id) != null){
+                                                    $prevTag = json_decode($prev_data->tag_id) ;
+                                                }
+                                            @endphp
+                                            <option value="{{$row->id}}" @if(in_array($row->id, (old('tag_id') ?? $prevTag ?? []) ))) selected @endif>{{$row->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -136,7 +141,7 @@
 
             $('#tag').selectpicker();
 
-            $('#summernote').summernote('code', '{!! old('description') ?? $prev_data->description    ?? '' !!} ');
+            $('#summernote').summernote('code', '{!! old('description') ?? $prev_data->description ?? '' !!} ');
 
         </script>
     </x-slot>

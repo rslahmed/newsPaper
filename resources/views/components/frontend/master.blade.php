@@ -26,6 +26,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/font-awesome/css/font-awesome.min.css')}}">
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/Pe-icon-7-stroke.css')}}" />
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/flaticon.css')}}" />
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
     <link rel="stylesheet" type="text/css" href="{{asset('frontend/css/style.css')}}">
 </head>
 
@@ -52,7 +54,24 @@
 <script type="text/javascript" src="{{asset('frontend/js/RYPP.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/js/jquery-ui.js')}}"></script>
 <script type="text/javascript" src="{{asset('frontend/js/form-classie.js')}}"></script>
+<script src="//cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
 <script type="text/javascript" src="{{asset('frontend/js/custom.js')}}"></script>
+<script !src="">
+    // alertify msg
+    @if(Session::has('success'))
+    alertify.success('{{ Session::get('success') }}');
+    @endif
+
+    @if(Session::has('error'))
+    alertify.error('{{ Session::get('error') }}');
+    @endif
+
+    @if($errors->any())
+    @foreach ($errors->all() as $error)
+    alertify.error('{{ $error }}');
+    @endforeach
+    @endif
+</script>
 </body>
 
 </html>

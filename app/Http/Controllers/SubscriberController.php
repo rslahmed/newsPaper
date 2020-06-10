@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\SubscriberWelcome;
 use App\Subscriber;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class SubscriberController extends Controller
 {
@@ -19,11 +21,15 @@ class SubscriberController extends Controller
     {
         $data = request()->validate([
             'email' => 'required|email|unique:subscribers'
-        ]);
+        ],
+            [
+                'email.unique' => 'You have alreaedy subscribe'
+            ]);
 
         $create = Subscriber::create($data);
         if($create){
-            return back()->with('success', 'Subscriber added');
+            Mail::to(request()->email)->send(new SubscriberWelcome());
+            return back()->with('success', 'Thank you for subscribe');
         }else{
             return back()->with('error', 'Something went wrong, please try again');
         }

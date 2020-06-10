@@ -56,3 +56,5 @@ Route::get('/subscriber/destroy/{id}', 'SubscriberController@destroy')->name('su
 //journalist
 Route::get('/journalist/index', 'JournalistController@index')->name('journalist.index');
 Route::get('/journalist/destroy/{id}', 'JournalistController@destroy')->name('journalist.destroy');
+
+Route::get('/email', 'SubscriberController@welcomeEmail');

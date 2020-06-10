@@ -27,14 +27,22 @@
                         <p class="mb-1"><span class="td-un">Category</span>: {{$post->category->name ?? 'No Category'}}</p>
                         <p class="mb-1"><span class="td-un">Sub Category</span>: {{$post->subcategory->name ?? 'No Category'}}</p>
                         <p class="mb-1"><span class="td-un">Tags</span>:
-                            @if(!empty($post->tag_id))
-                                @foreach($post->tags(json_decode($post->tag_id)) as $row)
-                                    {{$row->name}},
-                                @endforeach
+                            @if(!empty($tags) && $tags != null)
+                            @foreach($tags as $tag)
+                                {{$tag->name}}
+                                @if(!$loop->last)
+                                    ,
+                                @endif
+                            @endforeach
+                            @else
+                            No tag
                             @endif
                         </p>
                         <p class="mb-1">
                             <span class="td-un">Author name</span>: {{$post->author_name ?? 'Unknown'}}
+                        </p>
+                        <p class="mb-1">
+                            <span class="td-un">Published</span>: @if($post->published == 1) Yes @else No @endif
                         </p>
                     </div>
                 </div>
