@@ -1,4 +1,7 @@
-<x-backend.master>
+
+@extends('backend.layout')
+
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-10 m-auto">
@@ -84,32 +87,32 @@
             </form>
         </div>
     </div>
+@endsection
 
-    <x-slot name="script">
-        <script !src="">
-            $('.edit_btn').click(function(){
-                let name = $(this).attr('data-name');
-                let id = $(this).attr('data-id');
-                let prevCat = $(this).attr('data-catID');
-                $('#createCat').modal('show');
-                $('#catName').val(name);
-                $('#category option[value="' + prevCat + '"]').prop('selected', true);
-                $('#modalForm').attr('action', '/subcategory/update/'+id);
-                $('#modalTitle').text('Edit Subcategory');
-            })
+@section('script')
+    <script !src="">
+        $('.edit_btn').click(function(){
+            let name = $(this).attr('data-name');
+            let id = $(this).attr('data-id');
+            let prevCat = $(this).attr('data-catID');
+            $('#createCat').modal('show');
+            $('#catName').val(name);
+            $('#category option[value="' + prevCat + '"]').prop('selected', true);
+            $('#modalForm').attr('action', '/subcategory/update/'+id);
+            $('#modalTitle').text('Edit Subcategory');
+        })
 
-            $('.add_btn').click(function(){
-                $('#createCat').modal('show');
-                $('#modalForm').trigger("reset");
-                $('#modalForm').attr('action', '/subcategory/store');
-                $('#modalTitle').text('Add Subcategory');
-            })
+        $('.add_btn').click(function(){
+            $('#createCat').modal('show');
+            $('#modalForm').trigger("reset");
+            $('#modalForm').attr('action', '/subcategory/store');
+            $('#modalTitle').text('Add Subcategory');
+        })
 
-            $(document).on('change', '#subcat_filter', function(){
-                loaderShow();
-                let filtID = $(this).children("option:selected").val();
-                window.location = '/subcategory/filter/'+filtID;
-            })
-        </script>
-    </x-slot>
-</x-backend.master>
+        $(document).on('change', '#subcat_filter', function(){
+            loaderShow();
+            let filtID = $(this).children("option:selected").val();
+            window.location = '/subcategory/filter/'+filtID;
+        })
+    </script>
+@endsection

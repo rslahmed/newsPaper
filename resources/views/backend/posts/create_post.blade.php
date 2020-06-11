@@ -1,8 +1,6 @@
-{{--@dd($prev_data->category->subcategory)--}}
-{{--@dd($prev_data->category_id)--}}
-{{--@dd(json_decode($prev_data->tag_id ?? '[]'))--}}
+@extends('backend.layout')
 
-<x-backend.master>
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-11 m-auto">
@@ -111,38 +109,38 @@
             </div>
         </div>
     </div>
+@endsection
 
-    <x-slot name="script">
+@section('script')
+    <script !src="">
+        $(document).ready(function() {
+            // $('#summernote').summernote();
 
-        <script !src="">
-            $(document).ready(function() {
-                // $('#summernote').summernote();
+            $('#category').on('change', function(){
+                let id = $(this).val();
 
-                $('#category').on('change', function(){
-                    let id = $(this).val();
+                $.ajax({
+                    type:"GET",
+                    cache:false,
+                    url:"/get_subcategory",
+                    data:{id: id},
+                    success: function (response) {
+                        let data = JSON.parse(response);
+                        $('#subcategory option:not(".default")').remove();
+                        $.each(data, function(key, value){
+                            let html = `<option value="${value.id}">${value.name}</option>`;
+                            $('#subcategory').append(html);
+                        })
+                    }
+                });
 
-                    $.ajax({
-                        type:"GET",
-                        cache:false,
-                        url:"/get_subcategory",
-                        data:{id: id},
-                        success: function (response) {
-                            let data = JSON.parse(response);
-                            $('#subcategory option:not(".default")').remove();
-                            $.each(data, function(key, value){
-                                let html = `<option value="${value.id}">${value.name}</option>`;
-                                $('#subcategory').append(html);
-                            })
-                        }
-                    });
+            })
+        });
 
-                })
-            });
+        $('#tag').selectpicker();
 
-            $('#tag').selectpicker();
+        $('#summernote').summernote('code', '{!! old('description') ?? $prev_data->description ?? '' !!} ');
 
-            $('#summernote').summernote('code', '{!! old('description') ?? $prev_data->description ?? '' !!} ');
+    </script>
+@endsection
 
-        </script>
-    </x-slot>
-</x-backend.master>

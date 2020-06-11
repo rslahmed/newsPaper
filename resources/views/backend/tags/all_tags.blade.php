@@ -1,4 +1,6 @@
-<x-backend.master>
+@extends('backend.layout')
+
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-10 m-auto">
@@ -67,24 +69,24 @@
             </form>
         </div>
     </div>
+@endsection
 
-    <x-slot name="script">
-        <script !src="">
-            $('.edit_btn').click(function(){
-                let name = $(this).attr('data-name');
-                let id = $(this).attr('data-id');
-                $('#createCat').modal('show');
-                $('#catName').val(name);
-                $('#modalForm').attr('action', '/tag/update/'+id);
-                $('#modalTitle').text('Edit Tag');
-            })
+@section('script')
+    <script !src="">
+        $('.edit_btn').click(function(){
+            let name = $(this).attr('data-name');
+            let id = $(this).attr('data-id');
+            $('#createCat').modal('show');
+            $('#catName').val(name);
+            $('#modalForm').attr('action', '/tag/update/'+id);
+            $('#modalTitle').text('Edit Tag');
+        })
 
-            $('.add_btn').click(function(){
-                $('#createCat').modal('show');
-                $('#catName').val('');
-                $('#modalForm').attr('action', '/tag/store');
-                $('#modalTitle').text('Add Tag');
-            })
-        </script>
-    </x-slot>
-</x-backend.master>
+        $('.add_btn').click(function(){
+            $('#createCat').modal('show');
+            $('#catName').val('');
+            $('#modalForm').attr('action', '/tag/store');
+            $('#modalTitle').text('Add Tag');
+        })
+    </script>
+@endsection

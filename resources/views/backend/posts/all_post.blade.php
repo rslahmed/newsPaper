@@ -1,4 +1,5 @@
-<x-backend.master>
+@extends('backend.layout')
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-12 m-auto">
@@ -21,17 +22,17 @@
                             <tbody>
                             @if($post->count() > 0)
 
-                            @foreach($post as $row)
-                                <tr>
-                                    <th scope="row">{{$row->id}}</th>
-                                    <td>
-                                        <a href="{{route('post.show', $row->id)}}" class="text-dark">{{substr($row->title,0, 28)}}@if(strlen($row->title) > 28).... @endif</a>
-                                    </td>
-                                    <td>{{$row->category->name ?? 'N/A'}}</td>
-                                    <td>{{$row->subcategory->name ?? 'N/A'}}</td>
-                                    <td>@if($row->published == 1)Yes @else No @endif</td>
-                                </tr>
-                            @endforeach
+                                @foreach($post as $row)
+                                    <tr>
+                                        <th scope="row">{{$row->id}}</th>
+                                        <td>
+                                            <a href="{{route('post.show', $row->id)}}" class="text-dark">{{$row->title}} </a>
+                                        </td>
+                                        <td>{{$row->category->name ?? 'N/A'}}</td>
+                                        <td>{{$row->subcategory->name ?? 'N/A'}}</td>
+                                        <td>@if($row->published == 1)Yes @else No @endif</td>
+                                    </tr>
+                                @endforeach
 
                             @else
                                 <tr>
@@ -46,11 +47,4 @@
             </div>
         </div>
     </div>
-
-
-
-    <x-slot name="script">
-        <script !src="">
-        </script>
-    </x-slot>
-</x-backend.master>
+@endsection

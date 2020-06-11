@@ -1,4 +1,6 @@
-<x-backend.master>
+@extends('backend.layout')
+
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-11 m-auto">
@@ -15,7 +17,7 @@
                         <div class="post_img mb-3">
                             @if($post->image)
                                 <img style="max-height: 300px;" src="{{asset($post->image)}}" alt="">
-                                @else
+                            @else
                                 <p>No Preview image</p>
                             @endif
                         </div>
@@ -28,14 +30,14 @@
                         <p class="mb-1"><span class="td-un">Sub Category</span>: {{$post->subcategory->name ?? 'No Category'}}</p>
                         <p class="mb-1"><span class="td-un">Tags</span>:
                             @if(!empty($tags) && $tags != null)
-                            @foreach($tags as $tag)
-                                {{$tag->name}}
-                                @if(!$loop->last)
-                                    ,
-                                @endif
-                            @endforeach
+                                @foreach($tags as $tag)
+                                    {{$tag->name}}
+                                    @if(!$loop->last)
+                                        ,
+                                    @endif
+                                @endforeach
                             @else
-                            No tag
+                                No tag
                             @endif
                         </p>
                         <p class="mb-1">
@@ -49,9 +51,4 @@
             </div>
         </div>
     </div>
-
-    <x-slot name="script">
-        <script !src="">
-        </script>
-    </x-slot>
-</x-backend.master>
+@endsection

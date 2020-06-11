@@ -62,7 +62,7 @@ class PostController extends Controller
         $create = Post::create($data);
         if($create){
             if(request()->publish == 1 && request()->featured_news == 1){
-                $this->sendMailSub();
+                $this->sendMailSub($create->id);
             }
             return back()->with('success', 'New post created');
         }else{
@@ -131,7 +131,7 @@ class PostController extends Controller
         $update = Post::where('id', $id)->update($data);
         if($update){
             if($oldPub == 0 && request()->publish == 1 && request()->featured_news == 1){
-                $this->sendMailSub();
+                $this->sendMailSub($id);
             }
             return back()->with('success', 'Post updated');
         }else{
@@ -165,9 +165,9 @@ class PostController extends Controller
         ]);
     }
 
-    function sendMailSub(){
+    function sendMailSub($id){
         $mailData = new \stdClass;
-        $mailData->id =  request()->id;
+        $mailData->id =  $id;
         $mailData->subject =  request()->title;
         $subs = Subscriber::all();
         foreach ($subs as $sub){

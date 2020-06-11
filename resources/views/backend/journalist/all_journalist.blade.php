@@ -1,4 +1,6 @@
-<x-backend.master>
+@extends('backend.layout')
+
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-md-10 m-auto">
@@ -41,4 +43,4 @@
             </div>
         </div>
     </div>
-</x-backend.master>
+@endsection
