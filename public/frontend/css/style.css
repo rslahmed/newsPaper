@@ -1201,7 +1201,9 @@ header {
 }
 
 .post-wrapper .post-thumb img {
-    width: 100%
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
 }
 
 .post-wrapper .post-thumb a:last-child::before {
@@ -2761,7 +2763,7 @@ textarea.input_field {
     border-width: 8px 11px 8px 0px;
     border-style: solid;
     border-color: transparent #f6f6f6;
-    ;
+;
     top: 10px;
 }
 
@@ -3189,7 +3191,7 @@ textarea.input_field {
 .post-style2 {
     display: table;
     margin: 20px 0 30px;
-    ;
+;
     width: 100%;
 }
 
@@ -4277,4 +4279,26 @@ a.expand {
     .videoWrapper-1 {
         padding-bottom: 63%;
     }
+}
+
+
+.mb-0{
+    margin-bottom: 0 !important;
+}
+
+
+.comment_rep_box{
+    margin-top: 20px;
+    margin-left: 120px;
+    margin-bottom: 50px;
+}
+
+.rep_cancle_btn{
+    margin-right: 10px;
+    background-color: #ff4c62;
+    border: 2px solid #ff4c62;
+}
+
+button:focus{
+    outline: none !important;
 }

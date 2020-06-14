@@ -20,5 +20,9 @@ class Post extends Model
         return $this->belongsTo(SubCategory::class);
     }
 
+    function comment(){
+        return $this->hasMany(Comment::class);
+    }
+
 
 }

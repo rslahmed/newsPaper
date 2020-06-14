@@ -17,9 +17,13 @@ class SubscriberNews extends Mailable
      * @return void
      */
     public $mailData;
-    public function __construct($mailData)
+    public $token;
+    public $unID;
+    public function __construct($mailData,$unID,$token)
     {
-        return $this->mailData = $mailData;
+        $this->mailData = $mailData;
+        $this->token = $token;
+        $this->unID = $unID;
     }
 
     /**
@@ -31,7 +35,9 @@ class SubscriberNews extends Mailable
     {
 
         return $this->view('emails.subscriber_news',[
-            'mailData' => $this->mailData
+            'mailData' => $this->mailData,
+            'token' => $this->token,
+            'unID' => $this->unID,
         ])
             ->subject($this->mailData->subject);
     }

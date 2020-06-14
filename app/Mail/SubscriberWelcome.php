@@ -11,8 +11,12 @@ class SubscriberWelcome extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public function __construct()
+    public $token;
+    public $unID;
+    public function __construct($unID,$token)
     {
+        $this->token = $token;
+        $this->unID = $unID;
     }
 
     /**
@@ -23,7 +27,10 @@ class SubscriberWelcome extends Mailable
     public function build()
     {
 
-        return $this->view('emails.subscriber_welcome')
+        return $this->view('emails.subscriber_welcome',[
+            'token' => $this->token,
+            'unID' => $this->unID,
+        ])
             ->subject('Thank you for subscribe');
     }
 }

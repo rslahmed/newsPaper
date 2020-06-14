@@ -60,7 +60,7 @@
                         <table width="150" height="30" cellpadding="0" cellspacing="0" border="0" bgcolor="#FFD172">
                             <tr>
                                 <td align="center" valign="middle" height="30" style="font-size:14px; ">
-                                    <a href="{{route('post.show', $mailData->id)}}" target="_blank" style="color:#000; display: inline-block; text-decoration: none; line-height:21px; width:150px; ">View article</a>
+                                    <a href="{{route('article.show', $mailData->id)}}" target="_blank" style="color:#000; display: inline-block; text-decoration: none; line-height:21px; width:150px; ">View article</a>
                                 </td>
                             </tr>
                         </table>

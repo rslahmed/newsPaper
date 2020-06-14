@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 
 class PostController extends Controller
 {
-    public $postImgPath = 'uploads/post/';
+    public $postImgPath = '/uploads/post/';
 
     public function index()
     {
@@ -153,6 +153,7 @@ class PostController extends Controller
     }
 
     function validatePost(){
+
         return request()->validate([
            'title' => 'required|min:5|max:255',
            'description' => 'required|string',
@@ -171,7 +172,9 @@ class PostController extends Controller
         $mailData->subject =  request()->title;
         $subs = Subscriber::all();
         foreach ($subs as $sub){
-            Mail::to($sub->email)->send(new SubscriberNews($mailData));
+            $unID = $sub->id;
+            $token = $sub->token;
+            Mail::to($sub->email)->send(new SubscriberNews($mailData, $unID, $token));
         }
     }
 }

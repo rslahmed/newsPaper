@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSubscribersTable extends Migration
+class CreateCommentRepliesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,14 @@ class CreateSubscribersTable extends Migration
      */
     public function up()
     {
-        Schema::create('subscribers', function (Blueprint $table) {
+        Schema::create('comment_replies', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unique();
-            $table->string('token');
+            $table->integer('comment_id');
+            $table->string('name');
+            $table->string('comment');
+            $table->foreign('comment_id')
+                ->references('id')->on('comments')
+                ->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +32,6 @@ class CreateSubscribersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subscribers');
+        Schema::dropIfExists('comment_replies');
     }
 }

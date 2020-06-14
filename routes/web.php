@@ -8,6 +8,17 @@ Auth::routes();
 Route::middleware(['guest'])->group(function () {
     //home
     Route::get('/', 'HomeController@index')->name('home');
+
+    //article
+    Route::get('/article/view/{id}', 'ArticleController@show')->name('article.show');
+
+    //comment
+    Route::post('/comment/store', 'CommentController@store')->name('comment.store');
+    Route::post('/comment_reply/store', 'CommentReplyController@store')->name('comment_reply.store');
+
+    //subscriber
+    Route::post('/subscriber/store', 'SubscriberController@store')->name('subscriber.store');
+    Route::get('/subscriber/unsubscribe/{id}/{token}', 'SubscriberController@unsubscribe')->name('subscriber.unsubscribe');
 });
 
 
@@ -54,7 +65,6 @@ Route::middleware(['auth'])->group(function () {
 
 //subscriber
     Route::get('/subscriber/index', 'SubscriberController@index')->name('subscriber.index');
-    Route::post('/subscriber/store', 'SubscriberController@store')->name('subscriber.store');
     Route::get('/subscriber/destroy/{id}', 'SubscriberController@destroy')->name('subscriber.destroy');
 
 //journalist

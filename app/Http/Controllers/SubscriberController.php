@@ -6,6 +6,7 @@ use App\Mail\SubscriberWelcome;
 use App\Subscriber;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class SubscriberController extends Controller
 {
@@ -22,13 +23,18 @@ class SubscriberController extends Controller
         $data = request()->validate([
             'email' => 'required|email|unique:subscribers'
         ],
-            [
-                'email.unique' => 'You have alreaedy subscribe'
-            ]);
+        [
+            'email.unique' => 'You have alreaedy subscribe'
+        ]);
+
+        $token = Str::random(12);
+
+        $data['token'] = $token;
 
         $create = Subscriber::create($data);
         if($create){
-            Mail::to(request()->email)->send(new SubscriberWelcome());
+            $unID = $create->id;
+            Mail::to(request()->email)->send(new SubscriberWelcome($unID,$token));
             return back()->with('success', 'Thank you for subscribe');
         }else{
             return back()->with('error', 'Something went wrong, please try again');
@@ -44,4 +50,20 @@ class SubscriberController extends Controller
             return back()->with('error', 'Something went wrong, please try again');
         }
     }
+
+
+    public function unsubscribe($id,$token)
+    {
+        $subs = Subscriber::findOrFail($id);
+        if($subs->token == $token){
+            $delete = $subs->delete();
+        }
+        if($delete){
+            return 'You have unsubscribe from Laranews. We are sorry to see you go';
+        }else{
+            return 'Something went wrong, please try again later';
+        }
+    }
+
+
 }

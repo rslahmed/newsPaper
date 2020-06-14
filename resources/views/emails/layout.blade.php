@@ -86,7 +86,7 @@
                             <table align="center" border="0" cellpadding="0" bgcolor="#E9ECF1" cellspacing="0" width="100%" style="background:#E9ECF1;">
                                 <tr>
                                     <td align="center" valign="top" style=" padding:5px 10px; font-size: 14px; line-height: 21px;">
-                                        If you receved this messages by mistake . <a href="#" style="color:#000; font-size: 14px;line-height:21px;"> unsubscribe,</a> please
+                                        If you dont want to received mail from us,<a href="{{route('subscriber.unsubscribe', ['id'=>$unID, 'token'=>$token])}}" style="color:#000; font-size: 14px;line-height:21px;"> unsubscribe</a> please
                                     </td>
                                 </tr>
                             </table>

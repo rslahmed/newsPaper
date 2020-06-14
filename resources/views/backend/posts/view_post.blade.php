@@ -46,6 +46,9 @@
                         <p class="mb-1">
                             <span class="td-un">Published</span>: @if($post->published == 1) Yes @else No @endif
                         </p>
+                        <p class="mb-1">
+                            <span class="td-un">Featured news</span>: @if($post->featured_news == 1) Yes @else No @endif
+                        </p>
                     </div>
                 </div>
             </div>
