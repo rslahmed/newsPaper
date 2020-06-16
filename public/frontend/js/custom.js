@@ -17,54 +17,13 @@ $(document).ready(function() {
         transitionStyle: "fade"
     });
 
-    $("#content-slide").owlCarousel({
-        //autoPlay: 5000, Set AutoPlay to 5 seconds
+
+
+    $(".category_slider").owlCarousel({
         items: 2,
         itemsDesktop: [1199, 2],
         itemsDesktopSmall: [980, 2],
         itemsTablet: [768, 2],
-        itemsTabletSmall: false,
-        itemsMobile: [479, 1],
-        pagination: false,
-        dots: false,
-        lazyLoad: true,
-        navigation: true,
-        navigationText: [
-            "<i class='fa pe-7s-angle-left'></i>",
-            "<i class='fa pe-7s-angle-right'></i>"
-        ],
-        afterInit: function(elem) {
-            var that = this;
-            that.owlControls.prependTo(elem);
-        }
-    });
-
-    $("#content-slide-2").owlCarousel({
-        items: 1,
-        itemsDesktop: [1199, 1],
-        itemsDesktopSmall: [980, 1],
-        itemsTablet: [768, 1],
-        itemsTabletSmall: false,
-        itemsMobile: [479, 1],
-        pagination: false,
-        dots: false,
-        lazyLoad: true,
-        navigation: true,
-        navigationText: [
-            "<i class='fa pe-7s-angle-left'></i>",
-            "<i class='fa pe-7s-angle-right'></i>"
-        ],
-        afterInit: function(elem) {
-            var that = this;
-            that.owlControls.prependTo(elem);
-        }
-    });
-
-    $("#content-slide-3").owlCarousel({
-        items: 1,
-        itemsDesktop: [1199, 1],
-        itemsDesktopSmall: [980, 1],
-        itemsTablet: [768, 1],
         itemsTabletSmall: false,
         itemsMobile: [479, 1],
         pagination: false,
@@ -192,21 +151,6 @@ $(document).ready(function() {
      Video Effect
      --------------------------------------------- */
 
-    $(".post-thumb").mouseenter(function() {
-            $(this).addClass("hover");
-        })
-        // handle the mouseleave functionality
-        .mouseleave(function() {
-            $(this).removeClass("hover");
-        });
-
-    $(".img-thumb").mouseenter(function() {
-            $(this).addClass("hover");
-        })
-        // handle the mouseleave functionality
-        .mouseleave(function() {
-            $(this).removeClass("hover");
-        });
     /* ---------------------------------------------
      Scroll to Top Button it is called for scrolling down to top at html
      --------------------------------------------- */

@@ -11,6 +11,9 @@ Route::middleware(['guest'])->group(function () {
 
     //article
     Route::get('/article/view/{id}', 'ArticleController@show')->name('article.show');
+    Route::get('/article/filter/{id}', 'ArticleController@filterCat')->name('article.filter');
+    Route::get('/article/filter_sub/{id}', 'ArticleController@filterSubCat')->name('article.filter_sub');
+    Route::post('/article/search/', 'ArticleController@search')->name('article.search');
 
     //comment
     Route::post('/comment/store', 'CommentController@store')->name('comment.store');
@@ -19,6 +22,10 @@ Route::middleware(['guest'])->group(function () {
     //subscriber
     Route::post('/subscriber/store', 'SubscriberController@store')->name('subscriber.store');
     Route::get('/subscriber/unsubscribe/{id}/{token}', 'SubscriberController@unsubscribe')->name('subscriber.unsubscribe');
+
+    // contact us
+    Route::get('/contact_us/', 'HomeController@contact_us')->name('contact_us');
+    Route::post('/contact_us/form', 'HomeController@contactForm')->name('contact.form');
 });
 
 
@@ -71,5 +78,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/journalist/index', 'JournalistController@index')->name('journalist.index');
     Route::get('/journalist/destroy/{id}', 'JournalistController@destroy')->name('journalist.destroy');
     Route::get('/email', 'SubscriberController@welcomeEmail');
+
+//general setting
+    Route::get('/general_setting', 'DashboardController@general')->name('general');
+    Route::post('/general_setting/store', 'DashboardController@generalSetup')->name('general.setup');
 });
 

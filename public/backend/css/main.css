@@ -1,4 +1,4 @@
-.tim-row {
+tim-row {
   margin-bottom: 20px;
 }
 
@@ -207,4 +207,12 @@ table.dataTable th.no-sorting{
 }
 table#sortableTable {
     margin-top: 25px;
+}
+
+#logo_prev{
+    max-width: 250px;
+}
+
+.sub_btn{
+    display: none;
 }

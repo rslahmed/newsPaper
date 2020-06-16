@@ -390,11 +390,6 @@ if it's not present, don't show loader */
     margin-bottom: 0px;
 }
 
-.post-wrapper:hover .post-badge {
-    border: 0px solid transparent;
-    text-decoration: none;
-    padding-right: 110px;
-}
 
 .slide .post-badge:after {
     position: absolute;
@@ -403,97 +398,41 @@ if it's not present, don't show loader */
     opacity: 0;
 }
 
-.post-wrapper:hover .post-badge:after {
-    margin-left: 2px;
-    opacity: 1;
-}
-
-.post-wrapper .btn_one:after {
-    content: " ASHION";
-    position: absolute;
-    margin-left: -10px;
-    transition: all .3s;
-    opacity: 0;
-}
 
 .btn_one {
     background-color: #86a821;
-}
-
-.slide .btn_two:after {
-    content: " RAVELL";
-    position: absolute;
-    margin-left: -10px;
-    transition: all .3s;
-    opacity: 0;
 }
 
 .btn_two {
     background-color: #ca4335;
 }
 
-.slide .btn_three:after {
-    content: " PORTS";
-    position: absolute;
-    margin-left: -10px;
-    transition: all .3s;
-    opacity: 0;
-}
 
 .btn_three {
     background-color: #ff0042;
 }
 
-.slide .btn_four:after {
-    content: " IFESTYLE";
-    position: absolute;
-    margin-left: -10px;
-    transition: all .3s;
-    opacity: 0;
-}
 
 .btn_four {
     background-color: #1a1a1a;
-}
-
-.slide .btn_five:after {
-    content: " USINESS";
-    position: absolute;
-    margin-left: -10px;
-    transition: all .3s;
-    opacity: 0;
 }
 
 .btn_five {
     background-color: #fbbc05;
 }
 
-.slide .btn_six:after {
-    content: " ECHNOLOGY";
-}
-
 .btn_six {
     background-color: #d91897;
 }
 
-.slide .btn_sev:after {
-    content: " NTERNATIONAL";
-}
 
 .btn_sev {
     background-color: #229ad6;
 }
 
-.slide .btn_eight:after {
-    content: " EALTH";
-}
 
 .btn_eight {
     background-color: #229ad6;
-}
-
-.slide .btn_nine:after {
-    content: " OLITICS";
 }
 
 .btn_nine {
@@ -4301,4 +4240,41 @@ a.expand {
 
 button:focus{
     outline: none !important;
+}
+
+
+.category_slider .item{
+    padding: 0 15px;
+}
+.category_slider .item img{
+    height: 200px;
+    object-fit: cover;
+}
+
+.mt-0{
+    margin-top: 0 !important;
+}
+
+.post-style1 img{
+    height: 200px;
+    object-fit: cover;
+}
+
+p.today_date{
+    font-size: 18px;
+    line-height: 36px;
+    margin-bottom: 0;
+}
+
+.dropdown:hover > ul.dropdown-menu {
+    display: block;
+}
+
+ul.dropdown-menu {
+    margin-top: 0 !important;
+}
+
+#map iframe{
+    width: 100%;
+    height: 100%;
 }

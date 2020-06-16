@@ -52,26 +52,22 @@
                         <!-- /input-group -->
                     </li>
                     <li><a href="index.html">Home</a></li>
-                    <li>
-                        <a href="#">All pages<span class="fa arrow"></span></a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="#">Home <span class="fa arrow"></span></a>
-                                <ul class="nav nav-third-level">
-                                    <li><a href="home-style-one.html">Home style one</a> </li>
-                                    <li><a href="home-style-two.html">Home style two</a></li>
-                                    <li><a href="home-style-three.html">Home style three</a></li>
-                                    <li><a href="home-style-four.html">Home style four</a></li>
-                                    <li><a href="home-style-five.html">Home style five</a></li>
+                    @foreach($categories as $category)
+                        <li class="@if($category->subcategory->count() > 0) dropdown @endif">
+                            @if($category->subcategory->count() > 0)
+                                <a href="{{route('article.filter', $category->id)}}" class="" >{{$category->name}} <span class="fa arrow"></span></a>
+                                <ul class="nav nav-second-level">
+                                    @foreach($category->subcategory as $subcat)
+                                        <li class="dropdown-submenu">
+                                            <a href="{{route('article.filter_sub', $subcat->id)}}" class="text-uppercase">{{$subcat->name}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
-                                <!-- /.nav-third-level -->
-                            </li>
-
-                        </ul>
-                        <!-- /.nav-second-level -->
-                    </li>
-                    <li><a href="#">Contact</a></li>
-
+                            @else
+                                <a href="{{route('article.filter', $category->id)}}" class="text-uppercase">{{$category->name}}</a>
+                            @endif
+                        </li>
+                    @endforeach
                     <!-- social icon -->
                     <li>
                         <div class="social">
@@ -116,52 +112,16 @@
     <div class="top_header hidden-xs">
         <div class="container">
             <div class="row">
-                <div class="col-sm-4 col-md-3">
-                    <div class="top_header_menu_wrap">
-                        <ul class="top-header-menu">
-                            <li><a href="login%26registration.html">REGISTER</a></li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">LOGIN</a>
-                                <ul class="dropdown-menu">
-                                    <li>
-                                        <div class="login-inner">
-                                            <input type="text" class="form-control" id="name_email" name="name_email" placeholder="username or emaile">
-                                            <hr>
-                                            <input type="password" class="form-control" id="pass" name="pass" placeholder="*******">
-                                            <label class="checkbox-inline">
-                                                <input type="checkbox" value="">Remember me</label>
-                                            <button type="button" class="btn btn-lr btn-active">LOGIN</button>
-                                            <button type="button" class="btn btn-lr">REGISTR</button>
-                                            <div class="foeget"><a href="#">Forget username/password?</a></div>
-                                            <div class="social_icon">
-                                                <div class="social_icon_box social_icon_box_1">
-                                                    <div class="icon facebook-icon"></div>
-                                                    <span class="social_info">Login with facebook</span>
-                                                </div>
-                                            </div>
-                                            <div class="social_icon">
-                                                <div class="social_icon_box social_icon_box_2">
-                                                    <div class="icon twitter-icon"></div>
-                                                    <span class="social_info">Login with twitter</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li><a href="contact-style-two.html">CONTACT</a></li>
-                        </ul>
-                    </div>
-                </div>
                 <!--breaking news-->
-                <div class="col-sm-8 col-md-7">
+                <div class="col-sm-12 col-md-2">
+                    <p class="today_date">{{date('d M Y', strtotime(\Carbon\Carbon::now()))}}</p>
+                </div>
+                <div class="col-sm-12 col-md-8">
                     <div class="newsticker-inner">
                         <ul class="newsticker">
-                            <li><span class="color-1">Fashion</span><a href="#">Etiam imperdiet volutpat libero eu tristique.imperdiet volutpat libero eu tristique.</a></li>
-                            <li><span class="color-2">International</span><a href="#">Curabitur porttitor ante eget hendrerit adipiscing.</a></li>
-                            <li><span class="color-3">Health</span><a href="#">Praesent ornare nisl lorem, ut condimentum lectus gravida ut.</a></li>
-                            <li><span class="color-4">technology</span><a href="#">Nunc ultrices tortor eu massa placerat posuere.</a></li>
-                            <li><span class="color-1">Travel</span><a href="#">Etiam imperdiet volutpat libero eu tristique.imperdiet volutpat libero eu tristique.</a></li>
+                            @foreach($headlines as $row)
+                                <li><span class="color-1">শিরোনাম: </span><a href="#">{{$row->name}}</a></li>
+                            @endforeach
                         </ul>
                         <div class="next-prev-inner">
                             <a href="#" id="prev-button"><i class='pe-7s-angle-left'></i></a>
@@ -200,13 +160,13 @@
                     <div class="header-logo">
                         <!-- logo -->
                         <a href="home-style-one.html">
-                            <img class="td-retina-data img-responsive" src="frontend/images/logo.png" alt="">
+                            <img class="td-retina-data img-responsive" src="{{asset('frontend/images/logo.png')}}" alt="">
                         </a>
                     </div>
                 </div>
                 <div class="col-xs-8 col-md-8 col-sm-8 hidden-xs">
                     <div class="header-banner">
-                        <a href="#"><img class="td-retina img-responsive" src="frontend/images/top-bannner.jpg" alt=""></a>
+                        <a href="#"><img class="td-retina img-responsive" src="{{asset('frontend/images/top-bannner.jpg')}}" alt=""></a>
                     </div>
                 </div>
             </div>
@@ -222,20 +182,20 @@
                     @foreach($categories as $category)
                     <li class="@if($category->subcategory->count() > 0) dropdown @endif">
                         @if($category->subcategory->count() > 0)
-                        <a href="#" class="dropdown-toggle text-uppercase"  data-toggle="dropdown">{{$category->name}} <span class="pe-7s-angle-down"></span></a>
+                        <a href="{{route('article.filter', $category->id)}}" class="dropdown-toggle text-uppercase" >{{$category->name}} <span class="pe-7s-angle-down"></span></a>
                         <ul class="dropdown-menu menu-slide">
                             @foreach($category->subcategory as $subcat)
                             <li class="dropdown-submenu">
-                                <a href="#" class="text-uppercase">{{$subcat->name}}</a>
+                                <a href="{{route('article.filter_sub', $subcat->id)}}" class="text-uppercase">{{$subcat->name}}</a>
                             </li>
                             @endforeach
                         </ul>
                         @else
-                            <a href="#" class="text-uppercase">{{$category->name}}</a>
+                            <a href="{{route('article.filter', $category->id)}}" class="text-uppercase">{{$category->name}}</a>
                         @endif
                     </li>
                     @endforeach
-                    <li><a href="#">CONTACT</a></li>
+                    <li><a href="{{route('contact_us')}}">CONTACT</a></li>
                 </ul>
             </div>
             <!-- navbar-collapse -->
@@ -254,213 +214,43 @@
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
+                <div class="footer-box footer-logo-address">
+                    <h3 class="category-headding ">Contact us</h3>
+                    <div class="headding-border"></div>
+                    <!-- address  -->
+                    <img src="images/footer-logo.png" class="img-responsive" alt="">
+                    <address class="mt-0">
+                        14L.E Goulburn St, Sydney 2000NSW
+                        <br> Tell: 01922296392
+                        <br> Email: <a href="https://news365htmllatest.bdtask.com/cdn-cgi/l/email-protection" class="__cf_email__">news365@mail.com</a>
+                    </address>
+                </div>
+            </div>
+            <div class="col-sm-4">
                 <div class="footer-box">
                     <h3 class="category-headding">POPULAR TAGS</h3>
                     <div class="headding-border"></div>
-                    <a class="tag" href="#" title="">EDUCATION</a>
-                    <a class="tag" href="#" title="">FASHION</a>
-                    <a class="tag" href="#" title="">CREATIVE</a>
-                    <a class="tag" href="#" title="">CMS</a>
-                    <a class="tag" href="#" title="">ENTERTAINMENT</a>
-                    <a class="tag" href="#" title="">TECHNOLOGY</a>
-                    <a class="tag" href="#" title="">COLLAGE</a>
-                    <a class="tag" href="#" title="">CULTURE</a>
-                    <a class="tag" href="#" title="">BLOG</a>
-                    <a class="tag" href="#" title="">BUSINESS</a>
-                    <a class="tag" href="#" title="">MUSIC</a>
-                    <div class="newsletter-inner">
-                        <!-- newsletter -->
-                        <h3 class="category-headding ">NEWSLETTER</h3>
-                        <div class="headding-border"></div>
-                        <p>Enter your email address for our mailing list!</p>
-                        <form action="{{route('subscriber.store')}}" method="post">
-                            @csrf
-                            <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" required>
-                            <button type="submit" class="btn btn-style">Subscribe</button>
-                        </form>
-                    </div>
+                    @foreach($tags as $tag)
+                        <a class="tag" href="#" title="">{{$tag->name}}</a>
+                    @endforeach
                     <!-- /.newsletter -->
                 </div>
             </div>
             <div class="col-sm-4">
-                <div class="footer-box">
-                    <!-- featured news -->
-                    <h3 class="category-headding ">FEATURED NEWS</h3>
-                    <div class="headding-border bg-color-2"></div>
-                    <div class="box-item wow fadeIn" data-wow-duration="2s">
-                        <div class="img-thumb">
-                            <a href="#" rel="bookmark"><img class="entry-thumb" src="images/popular_news_01.jpg" alt="" height="80" width="100"></a>
-                        </div>
-                        <div class="item-details">
-                            <h6 class="sub-category-title bg-color-1">
-                                <a href="#">SPORTS</a>
-                            </h6>
-                            <h3 class="td-module-title"><a href="#">It is a long established fact that a reader will</a></h3>
-                            <div class="post-editor-date">
-                                <!-- post date -->
-                                <div class="post-date">
-                                    <i class="pe-7s-clock"></i> Oct 6, 2016
-                                </div>
-                                <!-- post comment -->
-                                <div class="post-author-comment"><i class="pe-7s-comment"></i> 13 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-item wow fadeIn" data-wow-duration="2s" data-wow-delay="0.2s">
-                        <div class="img-thumb">
-                            <a href="#" rel="bookmark"><img class="entry-thumb" src="images/popular_news_02.jpg" alt="" height="80" width="100"></a>
-                        </div>
-                        <div class="item-details">
-                            <h6 class="sub-category-title bg-color-2">
-                                <a href="#">TECHNOLOGY </a>
-                            </h6>
-                            <h3 class="td-module-title"><a href="#">The generated Lorem Ipsum is therefore</a></h3>
-                            <div class="post-editor-date">
-                                <!-- post date -->
-                                <div class="post-date">
-                                    <i class="pe-7s-clock"></i> Oct 6, 2016
-                                </div>
-                                <!-- post comment -->
-                                <div class="post-author-comment"><i class="pe-7s-comment"></i> 13 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="box-item wow fadeIn" data-wow-duration="2s" data-wow-delay="0.4s">
-                        <div class="img-thumb">
-                            <a href="#" rel="bookmark"><img class="entry-thumb" src="images/popular_news_03.jpg" alt="" height="80" width="100"></a>
-                        </div>
-                        <div class="item-details">
-                            <h6 class="sub-category-title bg-color-3">
-                                <a href="#">HEALTH</a>
-                            </h6>
-                            <h3 class="td-module-title"><a href="#">The standard chunk of Lorem Ipsum used since</a></h3>
-                            <div class="post-editor-date">
-                                <!-- post date -->
-                                <div class="post-date">
-                                    <i class="pe-7s-clock"></i> Oct 6, 2016
-                                </div>
-                                <!-- post comment -->
-                                <div class="post-author-comment"><i class="pe-7s-comment"></i> 13 </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- /.featured news -->
-            </div>
-            <div class="col-sm-4">
-                <div class="footer-box">
-                    <!-- top rated  -->
-                    <h3 class="category-headding">TOP RATED</h3>
-                    <div class="headding-border bg-color-3"></div>
-                    <table>
-                        <tbody>
-                        <tr>
-                            <td>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </td>
-                            <td><a href="#">This is FINLAND</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i>
-                                <i class="fa fa-star-o"></i>
-                            </td>
-                            <td><a href="#">Public Storage Canada</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </td>
-                            <td><a href="#">Bloomberg Professional</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </td>
-                            <td><a href="#">Ringling Bros. and </a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </td>
-                            <td><a href="#">The Official Star Wars Blog</a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
-                                <i class="fa fa-star-half-o"></i>
-                            </td>
-                            <td><a href="#">US Air Force General Chuck Yeager</a></td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <!-- /.top rated  -->
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-sm-3">
-                <div class="footer-box footer-logo-address">
-                    <!-- address  -->
-                    <img src="images/footer-logo.png" class="img-responsive" alt="">
-                    <address>
-                        14L.E Goulburn St, Sydney 2000NSW
-                        <br> Tell: 01922296392
-                        <br> Email: <a href="https://news365htmllatest.bdtask.com/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="c5a7a1b1a4b6ae85a2a8a4aca9eba6aaa8">[email&#160;protected]</a>
-                    </address>
-                </div>
-                <!-- /.address  -->
-            </div>
-            <div class="col-sm-3">
-                <div class="footer-box">
-                    <h3 class="category-headding">categories</h3>
-                    <div class="headding-border bg-color-4"></div>
-                    <ul>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Newsletter</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Pressroom</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Advertise online</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Language</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Being Part</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="footer-box">
-                    <h3 class="category-headding">POPULAR CATEGORY</h3>
-                    <div class="headding-border bg-color-5"></div>
-                    <ul>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Digital Edition</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Site Map</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">About Ads</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Give a Gift</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">About Us</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="col-sm-3">
-                <div class="footer-box">
-                    <h3 class="category-headding ">POPULAR CATEGORY</h3>
+                <div class="newsletter-inner mt-0">
+                    <!-- newsletter -->
+                    <h3 class="category-headding ">NEWSLETTER</h3>
                     <div class="headding-border"></div>
-                    <ul>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Newsletter</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Pressroom</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Advertise online</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Language</a></li>
-                        <li><i class="fa fa-dot-circle-o"></i><a href="#">Being Part</a></li>
-                    </ul>
+                    <p>Enter your email address for our mailing list!</p>
+                    <form action="{{route('subscriber.store')}}" method="post">
+                        @csrf
+                        <input type="text" class="form-control" id="email" name="email" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn-style">Subscribe</button>
+                    </form>
                 </div>
             </div>
+
+            <!-- /.top rated  -->
         </div>
     </div>
 </footer>

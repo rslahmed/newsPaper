@@ -33,9 +33,9 @@
                 <!-- tags -->
                     <div class="tags">
                         <ul>
-                            @if(!empty($tags))
-                                @foreach($tags as $tag)
-                                    <li><a href="#">{{$tag->name}}</a></li>
+                            @if(!empty($tag))
+                                @foreach($tag as $row)
+                                    <li><a href="#">{{$row->name}}</a></li>
                                 @endforeach
                             @else
                                 No tag
@@ -64,14 +64,14 @@
                                                 </div>
                                                 <div class="post-title-author-details">
                                                     <h4>
-                                                        <a href="{{route('article.show', $row->id)}}">{{Str::limit($row->title, 50, '...')}}</a>
+                                                        <a href="{{route('article.show', $row->id)}}">{{Str::limit($row->title, 40, '...')}}</a>
                                                     </h4>
                                                     <div class="post-editor-date">
                                                         <div class="post-date">
                                                             <i class="pe-7s-clock"></i> {{date('d-m-Y', strtotime($row->created_at))}}
                                                         </div>
                                                         <div class="post-author-comment"><i class="pe-7s-comment"></i>
-                                                            13
+                                                            {{$row->comment->count()}}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -175,6 +175,8 @@
                     </div>
                 </article>
             </div>
+
+            @include('frontend.partials.aside')
         </div>
     </div>
 @endsection

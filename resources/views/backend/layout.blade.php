@@ -90,6 +90,12 @@
                         <p>Subscriber</p>
                     </a>
                 </li>
+                <li class="@if(\Request::is('general_setting')) active @endif">
+                    <a href="{{route('general')}}">
+                        <i class="now-ui-icons loader_gear"></i>
+                        <p>General setting</p>
+                    </a>
+                </li>
             </ul>
         </div>
     </div>
