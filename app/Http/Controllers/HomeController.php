@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\GeneralSetting;
 use App\Headline;
 use App\Post;
 use App\Tag;
@@ -27,6 +28,7 @@ class HomeController extends Controller
             'weekly_news' => Post::where('created_at', '>=', $week)->get(),
             'tags' => Tag::limit(10)->get(),
             'headlines' => Headline::all(),
+            'general' => GeneralSetting::first(),
         ]);
     }
 
@@ -35,6 +37,7 @@ class HomeController extends Controller
             'categories' => Category::all(),
             'tags' => Tag::limit(10)->get(),
             'headlines' => Headline::all(),
+            'general' => GeneralSetting::first(),
         ]);
     }
 
@@ -45,6 +48,7 @@ class HomeController extends Controller
            'email' => 'email|required',
            'subject' => 'string',
            'message' => 'string|required',
+            'general' => GeneralSetting::first(),
         ]);
         return back()->with('success', 'Thank you');
     }

@@ -60,6 +60,6 @@ class DashboardController extends Controller
         }else{
             GeneralSetting::create($data);
         }
-        return back()->with('success', 'General setting updated');
+        return back()->with('success', 'General setting is updated');
     }
 }

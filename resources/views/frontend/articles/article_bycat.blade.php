@@ -47,6 +47,9 @@
                         </div>
                     </div>
                     @endforeach
+                    @if($posts->count() == 0)
+                        <h3 class="text-center">No post yet :(</h3>
+                    @endif
                 </div>
 
                 {{ $posts->links() }}

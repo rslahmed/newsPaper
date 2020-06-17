@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Category;
+use App\GeneralSetting;
 use App\Headline;
 use App\Post;
 use App\SubCategory;
@@ -27,7 +28,7 @@ class ArticleController extends Controller
             'related_news' => Post::where('category_id', $post->category->id)->where('id','!=',$id)->get(),
             'tags' => Tag::limit(10)->get(),
             'headlines' => Headline::all(),
-
+            'general' => GeneralSetting::all(),
         ]);
     }
 
@@ -38,7 +39,9 @@ class ArticleController extends Controller
             'posts' => Post::where('category_id', $id)->paginate(8),
             'selected_category' => Category::findOrFail($id),
             'headlines' => Headline::all(),
+            'general' => GeneralSetting::first(),
         ]);
+
     }
 
     public function filterSubCat($id){
@@ -48,6 +51,7 @@ class ArticleController extends Controller
             'posts' => Post::where('subcategory_id', $id)->paginate(8),
             'selected_category' => SubCategory::findOrFail($id),
             'headlines' => Headline::all(),
+            'general' => GeneralSetting::first(),
         ]);
     }
 
@@ -62,6 +66,7 @@ class ArticleController extends Controller
             'tags' => Tag::limit(10)->get(),
             'headlines' => Headline::all(),
             'posts'=> Post::where('title', 'LIKE', "%{$search}%")->paginate(8),
+            'general' => GeneralSetting::first(),
         ]);
     }
 }
