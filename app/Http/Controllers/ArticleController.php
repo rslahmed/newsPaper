@@ -28,7 +28,7 @@ class ArticleController extends Controller
             'related_news' => Post::where('category_id', $post->category->id)->where('id','!=',$id)->get(),
             'tags' => Tag::limit(10)->get(),
             'headlines' => Headline::all(),
-            'general' => GeneralSetting::all(),
+            'general' => GeneralSetting::first(),
         ]);
     }
 
